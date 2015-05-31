@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+sudo add-apt-repository ppa:builds/sphinxsearch-rel23
+
+sudo apt-get update
+
+sudo apt-get install sphinxsearch
