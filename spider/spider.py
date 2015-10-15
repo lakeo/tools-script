@@ -23,10 +23,11 @@ def get(protocol, pip, url):
   
   return proxy_detected
 
-file = open('ips','r')
+import sys
+file = open(sys.argv[1],'r')
 import re
 sum = 0
-p = re.compile('([\d,\.]+):(\d+).*')
+p = re.compile('([\d,\.]+)\s(\d+).*')
 for line in file:
     match = p.match(line)    
     if not match or match.groups().__len__() != 2:
@@ -37,6 +38,6 @@ for line in file:
         cnt = cnt  - 1
     	url = ('http://model.100autoshow.com/vote/index/id/170.html?num=%.0f' % (time.time()*1000))
     	ret = get('http',ip,url)
-        if ret == 1 or str(ret)==str('1'):
+        if isinstance(ret, basestring):
             sum = sum + 1
         print ip,ret,sum 
