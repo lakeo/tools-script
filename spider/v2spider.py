@@ -12,7 +12,7 @@ def get(protocol, pip, url):
     urllib2.install_opener(opener)
  
     req = urllib2.Request(url)
-    conn = urllib2.urlopen(req,timeout=2)
+    conn = urllib2.urlopen(req,timeout=3)
     detected_pip = conn.read()
     
     proxy_detected = detected_pip 
@@ -68,6 +68,7 @@ def run(ip):
 		ret = get('http',ip,url)
 		if isinstance(ret, basestring):
 			sum = sum + 1
+	print ip,sum
 	return sum
 
 
@@ -93,7 +94,6 @@ if __name__ == '__main__':
 	i=0
 	while(i < num):
 		i += 1
-		print i
 		thread = mythread(i)
 		thread.setDaemon(False)	
 		thread.start()
