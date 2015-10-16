@@ -12,16 +12,14 @@ def get(protocol, pip, url):
     urllib2.install_opener(opener)
  
     req = urllib2.Request(url)
-    conn = urllib2.urlopen(req,timeout=3)
+    conn = urllib2.urlopen(req,timeout=5)
     detected_pip = conn.read()
     
     proxy_detected = detected_pip 
   
   except urllib2.HTTPError, e:
-    print "ERROR: Code ", e.code
     return False
   except Exception, detail:
-    print "ERROR: ", detail
     return False
   
   return proxy_detected
@@ -59,6 +57,22 @@ def getips():
 		mutex.release()
 	return ips
 
+v2init = False
+v2ret = []
+def getipsv2():
+	global v2init,v2ret
+ 	if mutex.acquire(1) and not v2init: 
+		v2init = 1 
+		file = open('goodip','r')
+		for line in file:
+			r = re.match(r'([\d,\.]+)\s(\d+)',line)
+			if r:
+				v2ret.append('%s:%s'%(r.group(1),r.group(2)))
+		mutex.release()
+	ret= v2ret[v2init-1:v2init+50]
+	v2init += 50
+	return ret
+
 def run(ip):
 	cnt = 5
 	sum=0
@@ -68,17 +82,17 @@ def run(ip):
 		ret = get('http',ip,url)
 		if isinstance(ret, basestring):
 			sum = sum + 1
-	print ip,sum
+	if sum:
+		print ip
 	return sum
 
 
 def worker(id):
 	sum = 0
 	while True:
-		ips = getips()
+		ips = getipsv2()
 		for ip in ips:
 			sum += run(ip)
-		print ('in thread %s ' % id) , sum
 class mythread(threading.Thread):
 	def __init__(self, id):
 		self.id = id 
