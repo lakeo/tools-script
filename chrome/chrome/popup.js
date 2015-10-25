@@ -101,8 +101,8 @@ function renderStatus(statusText) {
 }
 
 function initListener() {
-  chrome.tabs.executeScript(null, {file: "jquery-2.1.4.min.js"});
-  chrome.tabs.executeScript(null, {file: "my.js"});
+  //chrome.tabs.executeScript(null, {file: "jquery-2.1.4.min.js"});
+  //chrome.tabs.executeScript(null, {file: "my.js"});
 
   document.getElementById('getUserBtn').onclick = function(){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
