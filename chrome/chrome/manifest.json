@@ -16,7 +16,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*"],
+      "matches": ["https://*/*","http://*/*"],
       "js": ["jquery-2.1.4.min.js", "my.js"]
     }
   ],
