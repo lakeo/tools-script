@@ -3,7 +3,7 @@
 
   "name": "微博小助手-索尔眼镜出品",
   "description": "This extension shows a Google Image search result for the current page",
-  "version": "1.0",
+  "version": "1.1",
 
   "browser_action": {
     "default_icon": "icon.png",
@@ -17,7 +17,7 @@
   "content_scripts": [
     {
       "matches": ["https://weibo.com/*","http://weibo.com/*"],
-      "js": ["jquery-2.1.4.min.js", "my.js"]
+      "js": ["jquery-2.1.4.min.js","tool.js", "my.js"]
     }
   ],
   "permissions": [
