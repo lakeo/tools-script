@@ -148,22 +148,15 @@ function autoPayAttention() {
             },1500);
         }
     } else if (currStatus == 'payingAttention') {
-        try{
-            setTimeout(function() {
-                payAttendToAll();
-            },1500)
-        }catch(err) {
-            console.log(err)
-        }
-        localStorage.auto_pay_attention_status_times = parseInt(times) + 1;
-        localStorage.auto_pay_attention_status_run_time = (new Date()).getTime();
         if(parseInt(times) > 2) {
             var now = new Date();
-            var timeStep = now.getTime() + 200000 - parseInt(lastTime);
-            if (timeStep > 200000) {
-                timeStep = 200000;
+            var timeStep = 300000 + parseInt(lastTime) - now.getTime()
+            if (timeStep > 300000) {
+                timeStep = 300000;
+            }else if (timeStep < 0) {
+                timeStep = 1000;	
             }
-            console.log('timestep:' + timeStep+ ' now:'+now.toString());
+            console.log('timestep:' + timeStep+ ' now:'+now.toString() + ' lasttime:'+lastTime);
             //休息300s
             setTimeout(function(){
                 localStorage.auto_pay_attention_status = 'gotoPageFan';
@@ -172,6 +165,16 @@ function autoPayAttention() {
                 gotoPageFan();
             },timeStep);
         } else {
+	    try{
+                setTimeout(function() {
+          	    payAttendToAll();
+            	},1500);
+            }catch(err) {
+            	console.log(err)
+            }
+            localStorage.auto_pay_attention_status_times = parseInt(times) + 1;
+            localStorage.auto_pay_attention_status_run_time = (new Date()).getTime();
+        
             setTimeout(function(){
                 try{
                     var text = jQuery(jQuery('dd[node-type="inner"] p[node-type="textLarge"]')[0]).text();
@@ -184,6 +187,7 @@ function autoPayAttention() {
                     console.log(err)
                 }
                 //goto next page
+                console.log('go to next page');
                 url = window.location.href + '?&page='+ (parseInt(times)+1);
                 window.location.href = url;
             },3000)
