@@ -52,6 +52,8 @@ function main() {
     console.log('current status is ' + mainStatus);
 
     //避免错误发生，在300秒之后如果无事情发生，必然会刷新
+    //此处无法解决所有问题，其他js错误可能导致下面的代码无法执行
+    //解决方案是使用一个自动刷新插件，协作操作
     setTimeout(function(){
         if (mainStatus != MANUALLY)
             window.location.href='http://weibo.com';

@@ -143,7 +143,9 @@ function autoPayAttention() {
         }catch(err) {
             console.log(err)
             localStorage.auto_pay_attention_status = 'gotoPageFan';
-            gotoPageFan();
+            setTimeout(function(){
+                gotoPageFan();
+            },1500);
         }
     } else if (currStatus == 'payingAttention') {
         try{
