@@ -134,21 +134,23 @@ function autoPayAttention() {
         gotoPageFan();
     } else if (currStatus == 'gotoPageFanFan'){
         //must be in fan's page
-        try{
-            var cnt = jQuery('a[usercard]').length;
-            var uid = jQuery(jQuery('a[usercard]')[parseInt(Math.random()*100) % cnt]).attr('usercard').substring(3);
-            var url = WEIBO+uid+'/fans';
-            localStorage.auto_pay_attention_status = 'payingAttention';
-            window.location.href = url;
-        }catch(err) {
-            console.log(err)
-            localStorage.auto_pay_attention_status = 'gotoPageFan';
-            setTimeout(function(){
-                gotoPageFan();
-            },1500);
-        }
+        setTimeout(function(){
+            try{
+                var cnt = jQuery('a[usercard]').length;
+                var uid = jQuery(jQuery('a[usercard]')[parseInt(Math.random()*100) % cnt]).attr('usercard').substring(3);
+                var url = WEIBO+uid+'/fans';
+                localStorage.auto_pay_attention_status = 'payingAttention';
+                window.location.href = url;
+            }catch(err) {
+                console.log(err)
+                localStorage.auto_pay_attention_status = 'gotoPageFan';
+                setTimeout(function(){
+                    gotoPageFan();
+                },1500);
+            }
+        },1500);
     } else if (currStatus == 'payingAttention') {
-        if(parseInt(times) > 2) {
+        if(parseInt(times) > 3) {
             var now = new Date();
             var timeStep = 300000 + parseInt(lastTime) - now.getTime()
             if (timeStep > 300000) {
@@ -165,7 +167,7 @@ function autoPayAttention() {
                 gotoPageFan();
             },timeStep);
         } else {
-	    try{
+	        try{
                 console.log('pay attention');
                 setTimeout(function() {
           	    payAttentionToAll();
