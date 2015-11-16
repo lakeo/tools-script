@@ -82,10 +82,10 @@ function initListener() {
         })
     }
 
-    document.getElementById('payAttendToAllBtn').onclick = function(){
+    document.getElementById('payAttentionToAllBtn').onclick = function(){
         checkTime(function(){
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, {cmd: "payAttendToAll",alert:false, msg:''}, function(response) {
+                chrome.tabs.sendMessage(tabs[0].id, {cmd: "payAttentionToAll",alert:false, msg:''}, function(response) {
                     console.log(response);
                 });
             });

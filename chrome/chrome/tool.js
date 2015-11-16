@@ -81,7 +81,7 @@ function cancelAllUser() {
     afterClick();
 }
 
-function payAttendToAll() {
+function payAttentionToAll() {
     try{
         jQuery('a[action-type="follow"]').each(function(){this.click()})
         jQuery('a[action-type="cancel"]')[0].click()
@@ -158,7 +158,7 @@ function autoPayAttention() {
             }
             console.log('timestep:' + timeStep+ ' now:'+now.toString() + ' lasttime:'+lastTime);
             //休息300s
-            setTimeout(function(){
+            setTimeout(function() {
                 localStorage.auto_pay_attention_status = 'gotoPageFan';
                 localStorage.setItem('soul_main_status', AUTO_LIKE_ALL_STATUS);
                 clearAllStatus();
@@ -166,8 +166,9 @@ function autoPayAttention() {
             },timeStep);
         } else {
 	    try{
+                console.log('pay attention');
                 setTimeout(function() {
-          	    payAttendToAll();
+          	    payAttentionToAll();
             	},1500);
             }catch(err) {
             	console.log(err)
@@ -187,8 +188,10 @@ function autoPayAttention() {
                     console.log(err)
                 }
                 //goto next page
-                console.log('go to next page');
-                url = window.location.href + '?&page='+ (parseInt(times)+1);
+                url = window.location.href;
+		url.substring(0,url.indexOf('fans')+4);
+                url += '?&page='+ (parseInt(times)+1); 
+                console.log('go to next page url:' + url);
                 window.location.href = url;
             },3000)
         }

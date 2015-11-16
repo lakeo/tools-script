@@ -19,9 +19,9 @@ function initListener() {
                         data:'empty'
                     }
                 )
-            }else if (request.cmd == "payAttendToAll"){
+            }else if (request.cmd == "payAttentionToAll"){
                 checkAlert(request);
-                payAttendToAll();
+                payAttentionToAll();
                 sendResponse(
                     {
                         cmd:'userList',
