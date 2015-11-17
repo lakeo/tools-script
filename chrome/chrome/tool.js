@@ -221,7 +221,7 @@ function autoCancelAttention() {
             console.log(err);
         }
         if (typeof times == 'undefined') {
-            times = 10
+            times = 1
         }
 
         localStorage.auto_cancel_attention_status_times = parseInt(times) + 1;
@@ -230,11 +230,11 @@ function autoCancelAttention() {
             localStorage.setItem('soul_main_status', AUTO_PAY_ATTENTION_STATUS);
             gotoPageFan();
         }
-        if (parseInt(times) <= 1) {
+        if (parseInt(times) <= 0) {
             times = 2;
         }
         setTimeout(function(){
-            gotoPageMyFollow(times);
+            gotoPageMyFollow(60-times);
         },2000);
     }
 }
