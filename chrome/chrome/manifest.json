@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "微博小助手-索尔眼镜出品",
+  "name": "微博小助手",
   "description": "This extension shows a Google Image search result for the current page",
   "version": "1.1",
 
