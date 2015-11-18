@@ -37,7 +37,7 @@ function likeAll() {
     var list = jQuery('a[action-type="fl_like"][title="赞"]');
     var total = list.length;
 
-    sleepRun(0,list,2500,function(index, array){
+    sleepRun(0,list,5500,function(index, array){
         array[index].click();
         jQuery('div[node-type="outer"]').css('display','none')
         jQuery('.W_layer').css('display','none')
@@ -152,9 +152,9 @@ function autoPayAttention() {
     } else if (currStatus == 'payingAttention') {
         if(parseInt(times) > 3) {
             var now = new Date();
-            var timeStep = 300000 + parseInt(lastTime) - now.getTime()
-            if (timeStep > 300000) {
-                timeStep = 300000;
+            var timeStep = 600000 + parseInt(lastTime) - now.getTime()
+            if (timeStep > 600000) {
+                timeStep = 600000;
             }else if (timeStep < 0) {
                 timeStep = 1000;	
             }
