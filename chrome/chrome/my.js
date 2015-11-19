@@ -39,12 +39,12 @@ function initListener() {
 }
 
 function main() {
-    if(typeof(Storage) === "undefined") {
-        console.log('Sorry! No Web Storage support..');
-        return;
-    }
+    //if(typeof(Storage) === "undefined") {
+    //    console.log('Sorry! No Web Storage support..');
+    //    return;
+    //}
 
-    var mainStatus =  localStorage.soul_main_status;
+    var mainStatus =  getCookie(MAIN_STATUS);//localStorage.soul_main_status;
     if (typeof(mainStatus) === 'undefined') {
         console.log('soul_main_status is null')
         return;
