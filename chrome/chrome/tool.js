@@ -261,10 +261,9 @@ function autoCancelAttention() {
         }
         if (typeof times == 'undefined') {
             times = 2 
-        } else if (times < 0 || times > 100) {
+        } else if (isNaN(times) || times < 0 || times > 100) {
             times = 2;
         }
-
         setCookie('auto_cancel_attention_status_times',parseInt(times) + 1);
         if(times >= 60) {
             clearAllStatus();
