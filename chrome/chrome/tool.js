@@ -38,13 +38,13 @@ function deleteCookie( name ) {
 function clearAllStatus() {
     //localStorage.removeItem('auto_pay_attention_status');
     //localStorage.removeItem('auto_pay_attention_status_times');
-    //localStorage.removeItem('auto_cancel_attention_status');
+    //localStorage.removeItem('auto_like_all_status');
     //localStorage.removeItem('auto_cancel_attention_status_times');
     //localStorage.removeItem('auto_cancel_attention_status')
 
     deleteCookie('auto_pay_attention_status');
     deleteCookie('auto_pay_attention_status_times');
-    deleteCookie('auto_cancel_attention_status');
+    deleteCookie('auto_like_all_status');
     deleteCookie('auto_cancel_attention_status_times');
     deleteCookie('auto_cancel_attention_status');
 }
@@ -154,9 +154,9 @@ b: gotoPageFanFan
 c: payingAttention
 */
 function autoPayAttention() {
-    var currStatus = getCookie(AUTO_PAY_ATTENTION_STATUS);//.auto_pay_attention_status;
-    var times = getCookie("auto_pay_attention_status_times");// localStorage.auto_pay_attention_status_times;
-    var lastTime = getCookie("auto_pay_attention_status_run_time");//localStorage.auto_pay_attention_status_run_time;
+    var currStatus = getCookie(AUTO_PAY_ATTENTION_STATUS);
+    var times = getCookie("auto_pay_attention_status_times");
+    var lastTime = getCookie("auto_pay_attention_status_run_time");
 
     if (typeof times == 'undefined') {
         times = 1
@@ -166,8 +166,8 @@ function autoPayAttention() {
     }
     console.log('auto attention status ' + currStatus + ' val='+times)
     if (currStatus == null || typeof(currStatus) == 'undefined' || currStatus == 'gotoPageFan') {
-        setCookie('auto_pay_attention_status','gotoPageFanFan');//localStorage.auto_pay_attention_status = 'gotoPageFanFan';
-        setCookie("auto_pay_attention_status_times",1);//localStorage.auto_pay_attention_status_times = 1;
+        setCookie('auto_pay_attention_status','gotoPageFanFan');
+        setCookie("auto_pay_attention_status_times",1);
         gotoPageFan();
     } else if (currStatus == 'gotoPageFanFan'){
         //must be in fan's page
@@ -176,12 +176,10 @@ function autoPayAttention() {
                 var cnt = jQuery('a[usercard]').length;
                 var uid = jQuery(jQuery('a[usercard]')[parseInt(Math.random()*100) % cnt]).attr('usercard').substring(3);
                 var url = WEIBO+uid+'/fans';
-                //localStorage.auto_pay_attention_status = 'payingAttention';
                 setCookie('auto_pay_attention_status','payingAttention');
                 window.location.href = url;
             }catch(err) {
                 console.log(err)
-                //localStorage.auto_pay_attention_status = 'gotoPageFan';
                 setCookie('auto_pay_attention_status','gotoPageFan');
                 setTimeout(function(){
                     gotoPageFan();
@@ -200,10 +198,8 @@ function autoPayAttention() {
             console.log('timestep:' + timeStep+ ' now:'+now.toString() + ' lasttime:'+lastTime);
             //休息300s
             setTimeout(function() {
-                //localStorage.auto_pay_attention_status = 'gotoPageFan';
                 setCookie('auto_pay_attention_status','gotoPageFan');
                 setCookie('soul_main_status',AUTO_LIKE_ALL_STATUS);
-                //localStorage.setItem('soul_main_status', AUTO_LIKE_ALL_STATUS);
                 clearAllStatus();
                 gotoPageFan();
             },timeStep);
@@ -216,8 +212,6 @@ function autoPayAttention() {
             }catch(err) {
             	console.log(err)
             }
-            //localStorage.auto_pay_attention_status_times = parseInt(times) + 1;
-            //localStorage.auto_pay_attention_status_run_time = (new Date()).getTime();
             setCookie('auto_pay_attention_status_times',parseInt(times) + 1);
             setCookie('auto_pay_attention_status_run_time',(new Date()).getTime());
             setTimeout(function(){
@@ -251,11 +245,11 @@ function autoPayAttention() {
 * b:cancel
 * */
 function autoCancelAttention() {
-    var currStatus = getCookie('auto_cancel_attention_status')//localStorage.auto_cancel_attention_status;
-    var times = getCookie('auto_cancel_attention_status_times');//localStorage.auto_cancel_attention_status_times;
+    var currStatus = getCookie('auto_cancel_attention_status');
+    var times = getCookie('auto_cancel_attention_status_times');
     times = parseInt(times);
     console.log('in autoCancelAttention ' + currStatus + ' val '+times);
-    if(typeof currStatus == 'undefined' || currStatus == 'gotoPage' ) {
+    if(typeof currStatus == 'undefined' || currStatus == 'gotoPage' || currStatus == null) {
         //localStorage.auto_cancel_attention_status = 'cancel';
         setCookie('auto_cancel_attention_status','cancel');
         gotoPageMyFollow();
@@ -271,11 +265,9 @@ function autoCancelAttention() {
             times = 2;
         }
 
-        //localStorage.auto_cancel_attention_status_times = parseInt(times) + 1;
         setCookie('auto_cancel_attention_status_times',parseInt(times) + 1);
         if(times >= 60) {
             clearAllStatus();
-            //localStorage.setItem('soul_main_status', AUTO_PAY_ATTENTION_STATUS);
             setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
             gotoPageFan();
         }
@@ -294,16 +286,14 @@ a: gotopage
 b: likeall
 * */
 function autoLikeAll() {
-    var currStatus = getCookie('auto_cancel_attention_status')//localStorage.auto_cancel_attention_status;
+    var currStatus = getCookie('auto_like_all_status')//localStorage.auto_cancel_attention_status;
 
-    if(typeof currStatus == 'undefined' || currStatus == 'gotoPage' ) {
-        //localStorage.auto_cancel_attention_status = 'likeAll';
-        setCookie('auto_cancel_attention_status','likeAll')
+    if(currStatus == null || typeof currStatus == 'undefined' || currStatus == 'gotoPage' ) {
+        setCookie('auto_like_all_status','likeAll')
         gotoHomePage();
     } else {
         likeAll();
         setTimeout(function() {
-            //localStorage.setItem('soul_main_status', AUTO_PAY_ATTENTION_STATUS);
             setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS)
             gotoPageFan();
         },30000);
@@ -315,7 +305,6 @@ function openAutoModel() {
         console.log('Sorry! No Web Storage support..');
         return;
     }
-    //localStorage.setItem('soul_main_status', AUTO_PAY_ATTENTION_STATUS);
     setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
     clearAllStatus();
     window.location.href = WEIBO;
