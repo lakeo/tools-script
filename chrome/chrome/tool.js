@@ -169,10 +169,10 @@ function autoPayAttention() {
     var times = getCookie("auto_pay_attention_status_times");
     var lastTime = getCookie("auto_pay_attention_status_run_time");
 
-    if (typeof times == 'undefined') {
+    if (null == times || isNaN(times) || typeof times == 'undefined') {
         times = 1
     }
-    if (typeof lastTime == 'undefined') {
+    if (null == lastTime || isNaN(lastTime) || typeof lastTime == 'undefined') {
         lastTime = 0;
     }
     console.log('auto attention status ' + currStatus + ' val='+times)
@@ -261,7 +261,6 @@ function autoCancelAttention() {
     times = parseInt(times);
     console.log('in autoCancelAttention ' + currStatus + ' val '+times);
     if(typeof currStatus == 'undefined' || currStatus == 'gotoPage' || currStatus == null) {
-        //localStorage.auto_cancel_attention_status = 'cancel';
         setCookie('auto_cancel_attention_status','cancel');
         gotoPageMyFollow();
     }else {
@@ -296,7 +295,7 @@ a: gotopage
 b: likeall
 * */
 function autoLikeAll() {
-    var currStatus = getCookie('auto_like_all_status')//localStorage.auto_cancel_attention_status;
+    var currStatus = getCookie('auto_like_all_status');
 
     if(currStatus == null || typeof currStatus == 'undefined' || currStatus == 'gotoPage' ) {
         setCookie('auto_like_all_status','likeAll')
@@ -326,6 +325,5 @@ function closeAutoModel() {
         console.log('Sorry! No Web Storage support..');
         return;
     }
-    //localStorage.setItem('soul_main_status', MANUALLY);
     setCookie('soul_main_status',MANUALLY);
 }
