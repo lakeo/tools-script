@@ -97,18 +97,29 @@ function checkAlert(request) {
 //console.log($.fn.jquery)
 function beforeClick() {
     console.log('before click')
+    while(!jQuery('div .W_fl a[action-type="batselect"]')[0]);
     jQuery('div .W_fl a[action-type="batselect"]')[0].click();
 }
 
 function afterClick() {
+    while(!jQuery('div .W_fl a[node-type="cancelFollowBtn"]')[0]);
     jQuery('div .W_fl a[node-type="cancelFollowBtn"]')[0].click()
+    while(!jQuery('div .W_layer_btn a[node-type="ok"]')[0]);
     jQuery('div .W_layer_btn a[node-type="ok"]')[0].click()
 }
 
 function cancelSingleUser() {
     beforeClick();
-    jQuery('.member_li').each(function(index){val = jQuery(this).find('.statu em:first');console.log(val);if( val.text() == 'Y' ){jQuery(this).click()}})
-    afterClick();
+    console.log('in cancelSingleUser')
+    setTimeout(function(){
+        jQuery('.member_li').each(function(index){
+            val = jQuery(this).find('.statu em:first');
+            if( val.text() == 'Y' ){
+                jQuery(this).click()
+            }
+        });
+       afterClick();
+    },1500);
 }
 
 function cancelAllUser() {
@@ -275,7 +286,7 @@ function autoCancelAttention() {
         }
         setTimeout(function(){
             gotoPageMyFollow(60-times);
-        },2000);
+        },4500);
     }
 }
 
