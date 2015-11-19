@@ -253,6 +253,7 @@ function autoPayAttention() {
 function autoCancelAttention() {
     var currStatus = getCookie('auto_cancel_attention_status')//localStorage.auto_cancel_attention_status;
     var times = getCookie('auto_cancel_attention_status_times');//localStorage.auto_cancel_attention_status_times;
+    times = parseInt(times);
     console.log('in autoCancelAttention ' + currStatus + ' val '+times);
     if(typeof currStatus == 'undefined' || currStatus == 'gotoPage' ) {
         //localStorage.auto_cancel_attention_status = 'cancel';
@@ -265,7 +266,9 @@ function autoCancelAttention() {
             console.log(err);
         }
         if (typeof times == 'undefined') {
-            times = 1
+            times = 2 
+        } else if (times < 0 || times > 100) {
+            times = 2;
         }
 
         //localStorage.auto_cancel_attention_status_times = parseInt(times) + 1;
