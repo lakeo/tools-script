@@ -44,9 +44,12 @@ function clearAllStatus() {
 
     deleteCookie('auto_pay_attention_status');
     deleteCookie('auto_pay_attention_status_times');
+
     deleteCookie('auto_like_all_status');
-    deleteCookie('auto_cancel_attention_status_times');
+
     deleteCookie('auto_cancel_attention_status');
+    deleteCookie('auto_cancel_attention_status_times');
+    deleteCookie('auto_cancel_attention_status_times_times')
 }
 
 function getCurrentUserId() {
@@ -97,14 +100,14 @@ function checkAlert(request) {
 //console.log($.fn.jquery)
 function beforeClick() {
     console.log('before click')
-    while(!jQuery('div .W_fl a[action-type="batselect"]')[0]);
+    //while(!jQuery('div .W_fl a[action-type="batselect"]')[0]);
     jQuery('div .W_fl a[action-type="batselect"]')[0].click();
 }
 
 function afterClick() {
-    while(!jQuery('div .W_fl a[node-type="cancelFollowBtn"]')[0]);
+    //while(!jQuery('div .W_fl a[node-type="cancelFollowBtn"]')[0]);
     jQuery('div .W_fl a[node-type="cancelFollowBtn"]')[0].click()
-    while(!jQuery('div .W_layer_btn a[node-type="ok"]')[0]);
+    //while(!jQuery('div .W_layer_btn a[node-type="ok"]')[0]);
     jQuery('div .W_layer_btn a[node-type="ok"]')[0].click()
 }
 
@@ -118,7 +121,9 @@ function cancelSingleUser() {
                 jQuery(this).click()
             }
         });
-       afterClick();
+        setTimeout(function(){
+            afterClick();
+        },1500);
     },1500);
 }
 
@@ -258,7 +263,16 @@ function autoPayAttention() {
 function autoCancelAttention() {
     var currStatus = getCookie('auto_cancel_attention_status');
     var times = getCookie('auto_cancel_attention_status_times');
+    var times_times = getCookie('auto_cancel_attention_status_times_times');
+
     times = parseInt(times);
+    if(null == times || isNaN(times) || typeof times == 'undefined') {
+        times = 2;
+    }
+    times_times = parseInt(times_times);
+    if(null == times_times || isNaN(times_times) || typeof times_times == 'undefined') {
+        times_times = 1;
+    }
     console.log('in autoCancelAttention ' + currStatus + ' val '+times);
     if(typeof currStatus == 'undefined' || currStatus == 'gotoPage' || currStatus == null) {
         setCookie('auto_cancel_attention_status','cancel');
@@ -275,16 +289,21 @@ function autoCancelAttention() {
             times = 2;
         }
         setCookie('auto_cancel_attention_status_times',parseInt(times) + 1);
-        if(times >= 60) {
+        if(times >= 80 && times_times >= 2) {
             clearAllStatus();
             setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
             gotoPageFan();
+        } else if (times>=80) {
+            times_times = 2;
+            times = 2;
+            setCookie('auto_cancel_attention_status_times',times);
+            setCookie('auto_cancel_attention_status_times_times',times_times);
         }
         if (parseInt(times) <= 0) {
             times = 2;
         }
         setTimeout(function(){
-            gotoPageMyFollow(60-times);
+            gotoPageMyFollow(80-times);
         },4500);
     }
 }
