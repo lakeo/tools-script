@@ -289,11 +289,11 @@ function autoCancelAttention() {
             times = 2;
         }
         setCookie('auto_cancel_attention_status_times',parseInt(times) + 1);
-        if(times >= 80 && times_times >= 2) {
+        if(times >= 70 && times_times >= 2) {
             clearAllStatus();
             setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
             gotoPageFan();
-        } else if (times>=80) {
+        } else if (times>=70) {
             times_times = 2;
             times = 2;
             setCookie('auto_cancel_attention_status_times',times);
