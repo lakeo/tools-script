@@ -128,9 +128,24 @@ function cancelSingleUser() {
 }
 
 function cancelAllUser() {
-    console.log('select user')
     beforeClick();
-    jQuery('.member_li').each(function(index){val = jQuery(this).find('em:first').text();if( true ){jQuery(this).click()}  })
+    jQuery('.member_li').each( function(index){
+        jQuery(this).click();
+    });
+    afterClick();
+}
+
+function cancelNotVipUser() {
+    beforeClick();
+    jQuery('.member_li').each( function(index){
+        var flag = true;
+        jQuery(this).find('i[title="微博个人认证 "]').each(function(){
+            flag = false;
+        });
+        if (flag) {
+            jQuery(this).click();
+        }
+    })
     afterClick();
 }
 
@@ -277,7 +292,22 @@ function autoCancelAttention() {
     if(typeof currStatus == 'undefined' || currStatus == 'gotoPage' || currStatus == null) {
         setCookie('auto_cancel_attention_status','cancel');
         gotoPageMyFollow();
-    }else {
+    } else if (currStatus == 'cancelNotVipUser') {
+        if (times >= 40) {
+            clearAllStatus();
+            setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
+            gotoPageFan();
+        }
+        setCookie('auto_cancel_attention_status_times',times + 1);
+        try{
+            cancelNotVipUser();
+        }catch(err) {
+            console.log(err);
+        }
+        setTimeout(function(){
+            gotoPageMyFollow(80-times);
+        },4500);
+    } else {
         try {
             cancelSingleUser();
         }catch(err) {
@@ -290,6 +320,23 @@ function autoCancelAttention() {
         }
         setCookie('auto_cancel_attention_status_times',parseInt(times) + 1);
         if(times >= 70 && times_times >= 3) {
+            //获取当前关注用户数目
+            try{
+                var users = jQuery('em[class="num S_txt1"]:first').text();
+                if (isNaN(users) || null == users) {
+                    users = 0;
+                } else {
+                    users = parseInt(users);
+                }
+                if (users >= 2850) {
+                    clearAllStatus();
+                    setCookie('auto_cancel_attention_status_times',0);
+                    setCookie('auto_cancel_attention_status','cancelNotVipUser');
+                    gotoPageMyFollow(40);
+                }
+            } catch(err) {
+                console.log(err);
+            }
             clearAllStatus();
             setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
             gotoPageFan();

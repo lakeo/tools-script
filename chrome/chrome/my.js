@@ -34,6 +34,8 @@ function initListener() {
                 openAutoModel();
             } else if (request.cmd == 'closeAutoModelBtn') {
                 closeAutoModel();
+            } else if (request.cmd == 'cancelNotVIPUser') {
+                cancelNotVipUser();
             }
         });
 }
