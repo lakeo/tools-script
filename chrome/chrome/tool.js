@@ -166,9 +166,9 @@ function gotoPageFan() {
 
 function gotoPageMyFollow(time) {
     var uid = getCurrentUserId();
-    var url = WEIBO+uid+'/follow';
+    var url = WEIBO+uid+'/follow?ignoreg=1';
     if(typeof time != 'undefined') {
-        url += '?Pl_Official_RelationMyfollow__108_page='+ time;
+        url += '&Pl_Official_RelationMyfollow__108_page='+ time;
     }
     window.location.href = url;
 }
