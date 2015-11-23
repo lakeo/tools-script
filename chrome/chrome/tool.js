@@ -131,25 +131,41 @@ function cancelSingleUser() {
 }
 
 function cancelAllUser() {
-    beforeClick();
-    jQuery('.member_li').each( function(index){
-        jQuery(this).click();
-    });
-    afterClick();
+    setTimeout(function(){
+        beforeClick();
+    },1000);
+
+    console.log('in cancelAllUser')
+    setTimeout(function(){
+        jQuery('.member_li').each( function(index){
+            jQuery(this).click();
+        });
+        setTimeout(function(){
+            afterClick();
+        },1500);
+    },2500);
 }
 
 function cancelNotVipUser() {
-    beforeClick();
-    jQuery('.member_li').each( function(index){
-        var flag = true;
-        jQuery(this).find('i[title="微博个人认证 "]').each(function(){
-            flag = false;
-        });
-        if (flag) {
-            jQuery(this).click();
-        }
-    })
-    afterClick();
+    setTimeout(function(){
+        beforeClick();
+    },1000);
+
+    console.log('in cancelNotVipUser')
+    setTimeout(function(){
+        jQuery('.member_li').each( function(index){
+            var flag = true;
+            jQuery(this).find('i[title="微博个人认证 "]').each(function(){
+                flag = false;
+            });
+            if (flag) {
+                jQuery(this).click();
+            }
+        })
+        setTimeout(function(){
+            afterClick();
+        },1500);
+    },2500);
 }
 
 function payAttentionToAll() {
