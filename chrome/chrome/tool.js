@@ -338,7 +338,7 @@ function autoCancelAttention() {
             times = 2;
         }
         setCookie('auto_cancel_attention_status_times',parseInt(times) + 1);
-        if(times >= 70 && times_times >= 2) {
+        if(times >= 70 && times_times >= 1) {
             //获取当前关注用户数目
             try{
                 var users = jQuery('em[class="num S_txt1"]:first').text();
