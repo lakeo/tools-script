@@ -112,7 +112,10 @@ function afterClick() {
 }
 
 function cancelSingleUser() {
-    beforeClick();
+    setTimeout(function(){
+        beforeClick();
+    },1000);
+
     console.log('in cancelSingleUser')
     setTimeout(function(){
         jQuery('.member_li').each(function(index){
@@ -124,7 +127,7 @@ function cancelSingleUser() {
         setTimeout(function(){
             afterClick();
         },1500);
-    },1500);
+    },2500);
 }
 
 function cancelAllUser() {
@@ -328,7 +331,7 @@ function autoCancelAttention() {
                 } else {
                     users = parseInt(users);
                 }
-                if (users >= 2850) {
+                if (users >= 2950) {
                     clearAllStatus();
                     setCookie('auto_cancel_attention_status_times',0);
                     setCookie('auto_cancel_attention_status','cancelNotVipUser');
@@ -351,7 +354,7 @@ function autoCancelAttention() {
         }
         setTimeout(function(){
             gotoPageMyFollow(80-times);
-        },4500);
+        },5500);
     }
 }
 
