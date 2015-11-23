@@ -310,7 +310,7 @@ function autoCancelAttention() {
     console.log('in autoCancelAttention ' + currStatus + ' val '+times);
     if(typeof currStatus == 'undefined' || currStatus == 'gotoPage' || currStatus == null) {
         setCookie('auto_cancel_attention_status','cancel');
-        gotoPageMyFollow(78);
+        gotoPageMyFollow(50);
     } else if (currStatus == 'cancelNotVipUser') {
         if (times >= 40) {
             clearAllStatus();
