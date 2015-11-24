@@ -347,7 +347,7 @@ function autoCancelAttention() {
                 } else {
                     users = parseInt(users);
                 }
-                if (users >= 2950) {
+                if (users >= 2850) {
                     clearAllStatus();
                     setCookie('auto_cancel_attention_status_times',0);
                     setCookie('auto_cancel_attention_status','cancelNotVipUser');
