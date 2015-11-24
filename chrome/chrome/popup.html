@@ -21,6 +21,9 @@
         overflow: hidden;
         max-width: 400px;
       }
+      input {
+        display: block;
+      }
     </style>
 
     <!--
@@ -36,13 +39,17 @@
     <div style="font-size: 10px;">
         <a id="url" href="#" >使用帮助</a>
     </div>
-    <input id="cancelUserBtn" type="button" value="取消单向关注">
-    <input id="cancelAllUserBtn" type="button" value="取消所有关注">
-    <input id="cancelNotVIPUserBtn" type="button" value="取消非认证用户关注">
-    <input id="payAttentionToAllBtn" type="button" value="关注所有人">
-    <input id="likeBtn" type="button" value="批量点赞">
-    <input id="openAutoModelBtn" type="button" value="开启自动模式">
-    <input id="closeAutoModelBtn" type="button" value="关闭自动模式">
+    <div style="display: block">
+      <input id="cancelUserBtn" type="button" value="取消单向关注">
+      <input id="cancelAllUserBtn" type="button" value="取消所有关注">
+      <input id="cancelNotVIPUserBtn" type="button" value="取消非认证用户关注">
+      <input id="payAttentionToAllBtn" type="button" value="关注所有人">
+      <input id="likeBtn" type="button" value="批量点赞">
+      <input id="openAutoModelBtn" type="button" value="开启自动模式">
+      <input id="closeAutoModelBtn" type="button" value="关闭自动模式">
+      <input id="openAutoCancelNotVipModelBtn" type="button" value="自动取消非认证用户关注模式">
+    </div>
+
   </body>
 </html>
 

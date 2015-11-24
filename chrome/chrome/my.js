@@ -36,6 +36,8 @@ function initListener() {
                 closeAutoModel();
             } else if (request.cmd == 'cancelNotVIPUser') {
                 cancelNotVipUser();
+            } else if (request.cmd == 'openAutoCancelNotVipModelBtn') {
+                openAutoCancelNotVipUser();
             }
         });
 }
@@ -60,7 +62,9 @@ function main() {
         if (mainStatus != MANUALLY)
             window.location.href='http://weibo.com';
     },305000);
-
+    
+    href = window.location.href;
+    
     try{
         if (mainStatus == MANUALLY) {
             console.log('do nothing');
