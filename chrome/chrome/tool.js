@@ -239,9 +239,9 @@ function autoPayAttention() {
     } else if (currStatus == 'payingAttention') {
         if(parseInt(times) > 3) {
             var now = new Date();
-            var timeStep = 600000 + parseInt(lastTime) - now.getTime()
-            if (timeStep > 600000) {
-                timeStep = 600000;
+            var timeStep = 900000 + parseInt(lastTime) - now.getTime()
+            if (timeStep > 900000) {
+                timeStep = 900000;
             }else if (timeStep < 0) {
                 timeStep = 1000;	
             }
