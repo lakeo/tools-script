@@ -135,8 +135,19 @@ function initListener() {
     }
 }
 
+function main() {
+    document.addEventListener('DOMContentLoaded', function() {
+            initListener();
+        }
+    );
+
+    //auto refresh
+    setTimeout(function(){
+        chrome.tabs.getSelected(null, function(tab) {
+            var code = 'window.location.reload();';
+            chrome.tabs.executeScript(tab.id, {code: code});
+        });
+    },60*10*1000);
+}
 //main logic
-document.addEventListener('DOMContentLoaded', function() {
-        initListener();
-    }
-);
+main();
