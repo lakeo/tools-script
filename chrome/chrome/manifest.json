@@ -10,14 +10,18 @@
     "default_popup": "popup.html",
     "default_title": "微博小助手"
   },
-  "background": {
-    "scripts": ["eventPage.js"],
-    "persistent": false
-  },
+
   "content_scripts": [
     {
       "matches": ["https://weibo.com/*","http://weibo.com/*","https://*.weibo.com/*","http://*.weibo.com/*"],
-      "js": ["jquery-2.1.4.min.js","tool.js", "my.js"]
+      "js": ["jquery-2.1.4.min.js","tool.js", "my.js"],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": ["eventPage.js"],
+      "matches": ["https://weibo.com/*","http://weibo.com/*","https://*.weibo.com/*","http://*.weibo.com/*"],
+      "run_at": "document_start"
     }
   ],
   "permissions": [

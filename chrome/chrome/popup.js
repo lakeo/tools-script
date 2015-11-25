@@ -140,14 +140,6 @@ function main() {
             initListener();
         }
     );
-
-    //auto refresh
-    setTimeout(function(){
-        chrome.tabs.getSelected(null, function(tab) {
-            var code = 'window.location.reload();';
-            chrome.tabs.executeScript(tab.id, {code: code});
-        });
-    },60*10*1000);
 }
 //main logic
 main();
