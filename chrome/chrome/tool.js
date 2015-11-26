@@ -301,7 +301,7 @@ function autoCancelAttention() {
 
     times = parseInt(times);
     if(null == times || isNaN(times) || typeof times == 'undefined') {
-        times = 2;
+        times = 0;
     }
     times_times = parseInt(times_times);
     if(null == times_times || isNaN(times_times) || typeof times_times == 'undefined') {
@@ -324,7 +324,7 @@ function autoCancelAttention() {
             console.log(err);
         }
         setTimeout(function(){
-            gotoPageMyFollow(80-times);
+            gotoPageMyFollow(88-times);
         },4500);
     } else {
         try {
@@ -333,9 +333,9 @@ function autoCancelAttention() {
             console.log(err);
         }
         if (typeof times == 'undefined') {
-            times = 2 
+            times = 0 
         } else if (isNaN(times) || times < 0 || times > 100) {
-            times = 2;
+            times = 0;
         }
         setCookie('auto_cancel_attention_status_times',parseInt(times) + 1);
         if(times >= 70 && times_times >= 1) {
@@ -361,15 +361,15 @@ function autoCancelAttention() {
             gotoPageFan();
         } else if (times>=70) {
             times_times += 1;
-            times = 2;
+            times = 0;
             setCookie('auto_cancel_attention_status_times',times);
             setCookie('auto_cancel_attention_status_times_times',times_times);
         }
         if (parseInt(times) <= 0) {
-            times = 2;
+            times = 0;
         }
         setTimeout(function(){
-            gotoPageMyFollow(80-times);
+            gotoPageMyFollow(88-times);
         },5500);
     }
 }
