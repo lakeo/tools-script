@@ -135,8 +135,11 @@ function initListener() {
     }
 }
 
+function main() {
+    document.addEventListener('DOMContentLoaded', function() {
+            initListener();
+        }
+    );
+}
 //main logic
-document.addEventListener('DOMContentLoaded', function() {
-        initListener();
-    }
-);
+main();
