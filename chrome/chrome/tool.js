@@ -313,7 +313,7 @@ function autoCancelAttention() {
         setCookie('auto_cancel_attention_status','cancel');
         gotoPageMyFollow(50);
     } else if (currStatus == 'cancelNotVipUser') {
-        if (times >= 40) {
+        if (times >= 50) {
             clearAllStatus();
             setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
             gotoPageFan();
@@ -325,7 +325,7 @@ function autoCancelAttention() {
             console.log(err);
         }
         setTimeout(function(){
-            gotoPageMyFollow(80-times);
+            gotoPageMyFollow(88-times);
         },4500);
     } else {
         try {
@@ -369,7 +369,7 @@ function autoCancelAttention() {
             times = 2;
         }
         setTimeout(function(){
-            gotoPageMyFollow(80-times);
+            gotoPageMyFollow(88-times);
         },5500);
     }
 }
