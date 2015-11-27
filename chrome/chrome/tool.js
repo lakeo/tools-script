@@ -335,26 +335,30 @@ function autoCancelAttention() {
         }
         setCookie('auto_cancel_attention_status_times',parseInt(times) + 1);
         if(times >= 70 && times_times >= 0) {
-            //获取当前关注用户数目
-            try{
-                var users = jQuery('em[class="num S_txt1"]:first').text();
-                if (isNaN(users) || null == users) {
-                    users = 0;
-                } else {
-                    users = parseInt(users);
+            setTimeout(function(){
+                //获取当前关注用户数目
+                try{
+                    var users = jQuery('em[class="num S_txt1"]:first').text();
+                    if (isNaN(users) || null == users) {
+                        users = 0;
+                    } else {
+                        users = parseInt(users);
+                    }
+                    console.log('current user number:' + users)
+                    if (users >= 2850) {
+                        clearAllStatus();
+                        setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
+                        setCookie('auto_cancel_attention_status_times',0);
+                        setCookie('auto_cancel_attention_status','cancelNotVipUser');
+                        gotoPageMyFollow(40);
+                    }
+                } catch(err) {
+                    console.log(err);
                 }
-                if (users >= 2850) {
-                    clearAllStatus();
-                    setCookie('auto_cancel_attention_status_times',0);
-                    setCookie('auto_cancel_attention_status','cancelNotVipUser');
-                    gotoPageMyFollow(40);
-                }
-            } catch(err) {
-                console.log(err);
-            }
-            clearAllStatus();
-            setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
-            gotoPageFan();
+                clearAllStatus();
+                setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
+                gotoPageFan();
+            },3000);
         } else if (times>=70) {
             times_times += 1;
             times = 2;
@@ -413,5 +417,6 @@ function openAutoCancelNotVipUser() {
     clearAllStatus();
     setCookie('auto_cancel_attention_status_times',0);
     setCookie('auto_cancel_attention_status','cancelNotVipUser');
+    setCookie('soul_main_status',AUTO_CANCELL_ATTENTION_STATUS);
     gotoPageMyFollow(40);
 }
