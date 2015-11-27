@@ -333,13 +333,8 @@ function autoCancelAttention() {
         }catch(err) {
             console.log(err);
         }
-        if (typeof times == 'undefined') {
-            times = 2 
-        } else if (isNaN(times) || times < 0 || times > 100) {
-            times = 2;
-        }
         setCookie('auto_cancel_attention_status_times',parseInt(times) + 1);
-        if(times >= 70 && times_times >= 1) {
+        if(times >= 70 && times_times >= 0) {
             //获取当前关注用户数目
             try{
                 var users = jQuery('em[class="num S_txt1"]:first').text();
