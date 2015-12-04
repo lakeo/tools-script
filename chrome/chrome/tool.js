@@ -158,6 +158,9 @@ function cancelNotVipUser() {
             jQuery(this).find('i[title="微博个人认证 "]').each(function(){
                 flag = false;
             });
+            jQuery(this).find('a[title="微博会员"]').each(function(){
+                flag = false;
+            });
             if (flag) {
                 jQuery(this).click();
             }
