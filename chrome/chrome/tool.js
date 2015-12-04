@@ -304,8 +304,8 @@ function autoCancelAttention() {
     var times_times = getCookie('auto_cancel_attention_status_times_times');
 
     times = parseInt(times);
-    if(null == times || isNaN(times) || typeof times == 'undefined') {
-        times = 2;
+    if(null == times || isNaN(times) || typeof times == 'undefined' || times < 0 || times > 100) {
+        times = 0;
     }
     times_times = parseInt(times_times);
     if(null == times_times || isNaN(times_times) || typeof times_times == 'undefined') {
@@ -364,12 +364,12 @@ function autoCancelAttention() {
             },3000);
         } else if (times>=70) {
             times_times += 1;
-            times = 2;
+            times = 0;
             setCookie('auto_cancel_attention_status_times',times);
             setCookie('auto_cancel_attention_status_times_times',times_times);
         }
         if (parseInt(times) <= 0) {
-            times = 2;
+            times = 0;
         }
         setTimeout(function(){
             gotoPageMyFollow(88-times);
