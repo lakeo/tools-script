@@ -337,7 +337,7 @@ function autoCancelAttention() {
             console.log(err);
         }
         setCookie('auto_cancel_attention_status_times',parseInt(times) + 1);
-        if(times >= 70 && times_times >= 1) {
+        if(times >= 70 && times_times >= 0) {
             setTimeout(function(){
                 //获取当前关注用户数目
                 try{
