@@ -1,0 +1,3 @@
+#!/bin/bash
+cd ~/Documents/source/tools-script/scrapy/joke/
+/usr/local/bin/scrapy crawl qiushi

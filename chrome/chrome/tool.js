@@ -182,7 +182,7 @@ function payAttentionToAll() {
 
 function gotoPageFan() {
     var uid = getCurrentUserId();
-    var url = WEIBO+uid+'/fans?Pl_Official_RelationFans__103_page='+parseInt(Math.random()*10 % 5);
+    var url = WEIBO+uid+'/fans?Pl_Official_RelationFans__103_page='+parseInt(Math.random()*10 % 2);
     window.location.href = url;
 }
 
@@ -316,7 +316,7 @@ function autoCancelAttention() {
         setCookie('auto_cancel_attention_status','cancel');
         gotoPageMyFollow(50);
     } else if (currStatus == 'cancelNotVipUser') {
-        if (times >= 50) {
+        if (times >= 78) {
             clearAllStatus();
             setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
             gotoPageFan();
@@ -337,7 +337,7 @@ function autoCancelAttention() {
             console.log(err);
         }
         setCookie('auto_cancel_attention_status_times',parseInt(times) + 1);
-        if(times >= 70 && times_times >= 0) {
+        if(times >= 70) {
             setTimeout(function(){
                 //获取当前关注用户数目
                 try{
@@ -350,7 +350,7 @@ function autoCancelAttention() {
                     console.log('current user number:' + users)
                     if (users >= 2850) {
                         clearAllStatus();
-                        setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
+                        setCookie('soul_main_status',AUTO_CANCELL_ATTENTION_STATUS);
                         setCookie('auto_cancel_attention_status_times',0);
                         setCookie('auto_cancel_attention_status','cancelNotVipUser');
                         gotoPageMyFollow(40);
@@ -362,11 +362,6 @@ function autoCancelAttention() {
                 setCookie('soul_main_status',AUTO_PAY_ATTENTION_STATUS);
                 gotoPageFan();
             },3000);
-        } else if (times>=70) {
-            times_times += 1;
-            times = 0;
-            setCookie('auto_cancel_attention_status_times',times);
-            setCookie('auto_cancel_attention_status_times_times',times_times);
         }
         if (parseInt(times) <= 0) {
             times = 0;
