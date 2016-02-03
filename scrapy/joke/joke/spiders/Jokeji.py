@@ -7,17 +7,23 @@ from joke.items import JokeItem
 
 
 class JokejiSpider(CrawlSpider):
-    name = 'Jokeji'
-    allowed_domains = ['jokeji.com']
-    start_urls = ['http://www.jokeji.com/']
+    name = 'jokeji'
+    allowed_domains = ['jokeji.cn']
+    start_urls = ['http://www.jokeji.cn/']
 
     rules = (
-        Rule(LinkExtractor(allow=r'Items/'), callback='parse_item', follow=True),
+        Rule(LinkExtractor(allow=r'/jokehtml/'), callback='parse_item', follow=True),
     )
 
     def parse_item(self, response):
-        i = JokeItem()
-        #i['domain_id'] = response.xpath('//input[@id="sid"]/@value').extract()
-        #i['name'] = response.xpath('//div[@id="name"]').extract()
-        #i['description'] = response.xpath('//div[@id="description"]').extract()
-        return i
+        items = response.xpath('//span[@id="text110"]')
+        jokes = []
+        for i in items:
+            joke = JokeItem()
+            joke['source'] = response.request.url
+            joke['title'] = ''
+            joke['content'] = "".join(i.extract())
+            joke['images'] = ""
+            jokes.append(joke)
+            self.logger.info(joke['content'])
+        return jokes

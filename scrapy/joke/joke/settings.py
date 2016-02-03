@@ -92,4 +92,4 @@ DOWNLOAD_TIMEOUT = 15
 
 LOG_LEVEL= 'INFO'
 #DEPTH_LIMIT = 1
-LOG_FILE = './joke.log'
+#LOG_FILE = './joke.log'
