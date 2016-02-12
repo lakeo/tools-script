@@ -30,13 +30,17 @@ class QiushiSpider(CrawlSpider):
             joke['source'] = response.request.url
             joke['title'] = ''
             joke['content'] = "".join(i.xpath('div[@class="content"]/text()').extract())
-            joke['images'] = "".join(i.xpath('div[@class="thumb"]').extract())
+            joke['images'] = ",".join(i.xpath('div[@class="thumb"]//img/@src').extract())
+            joke['like'] = "".join(i.xpath('div[@class="stats"]/span[@class="stats-vote"]/i/text()').extract())
+            joke['comment'] = "".join(i.xpath('div[@class="stats"]/span[@class="stats-comments"]/a/i/text()').extract())
+            joke['unlike'] = 0
+            joke['view'] = 0
             jokes.append(joke)
         return jokes
 
     def skip_item(self,response):
         return []
-
+    ''''
     def parse_article(self,response):
         items = response.xpath('//div[@id="single-next-link"]')
         jokes = []
@@ -49,6 +53,7 @@ class QiushiSpider(CrawlSpider):
             jokes.append(joke)
             #self.logger.info(str(joke).encode('unicode_escape'))
         return jokes
+    '''''
 
     def parse_item(self, response):
         items = response.xpath('//div[@class="article block untagged mb15"]')
@@ -58,7 +63,10 @@ class QiushiSpider(CrawlSpider):
             joke['source'] = response.request.url
             joke['title'] = ''
             joke['content'] = "".join(i.xpath('div[@class="content"]/text()').extract())
-            joke['images'] = "".join(i.xpath('div[@class="thumb"]').extract())
-            #self.logger.info(str(joke).decode('unicode_escape'))
+            joke['images'] = ",".join(i.xpath('div[@class="thumb//img/@src"]').extract())
+            joke['like'] = "".join(i.xpath('div[@class="stats"]/span[@class="stats-vote"]/i/text()').extract())
+            joke['comment'] = "".join(i.xpath('div[@class="stats"]/span[@class="stats-comments"]/a/i/text()').extract())
+            joke['unlike'] = 0
+            joke['view'] = 0
             jokes.append(joke)
         return jokes

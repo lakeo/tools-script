@@ -16,3 +16,10 @@ class JokeItem(scrapy.Item):
     title = scrapy.Field()
     content = scrapy.Field()
     images = scrapy.Field()
+
+    #ugc
+    like = scrapy.Field()
+    unlike = scrapy.Field()
+    comment = scrapy.Field()
+    view = scrapy.Field()
+

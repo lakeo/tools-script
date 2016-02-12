@@ -27,6 +27,5 @@ class ZolSpider(CrawlSpider):
             joke['title'] = ''
             joke['content'] = "".join(i.xpath('div[@class="summary-text"]/text()').extract())
             joke['images'] = ''
-            #self.logger.info(str(joke).decode('unicode_escape'))
             jokes.append(joke)
         return jokes
