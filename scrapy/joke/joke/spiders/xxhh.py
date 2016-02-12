@@ -8,8 +8,8 @@ from joke.items import JokeItem
 
 class XxhhSpider(CrawlSpider):
     name = 'xxhh'
-    allowed_domains = ['http://www.xxhh.com/']
-    start_urls = ['http://www.http://www.xxhh.com/']
+    allowed_domains = ['www.xxhh.com']
+    start_urls = ['http://www.xxhh.com/']
 
     rules = (
         Rule(LinkExtractor(allow=r'page/'), callback='parse_item', follow=True),
