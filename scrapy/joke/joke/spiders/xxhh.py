@@ -31,6 +31,5 @@ class XxhhSpider(CrawlSpider):
             joke['comment'] = 0
             joke['unlike'] = 0
             joke['view'] = 0
-            # jokes.append(joke)
-            print joke
+            jokes.append(joke)
         return jokes
