@@ -14,7 +14,7 @@ db =  SimpleDB.MySQLdb(
 def getKey(item):
         return hashlib.md5(item['content'].encode('unicode_escape').join(item['images'])).hexdigest()
 
-sql = 'select id,content,images from joke'
+sql = 'select id,content,images,md5code from joke'
 rows = db.query_dict(sql)()
 jokes = []
 
@@ -25,4 +25,5 @@ update = 'update joke set md5code = %s where id = %s'
 
 for j in jokes:
     key = getKey(j)
-    db.update(update,key,j['id'])
+    if j['md5code'] != key:
+        db.update(update,key,j['id'])
