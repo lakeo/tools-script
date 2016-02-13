@@ -18,7 +18,7 @@ class DuplicateDownloaderMidderware(UserAgentMiddleware):
             self.seen.add(request.url)
             spider.logger.info('processing url=%s' % request.url)
 
-
+import time
 class MyCustomDownloaderMiddleware(UserAgentMiddleware):
     def __init__(self, user_agent=''):
         self.user_agent = user_agent
@@ -28,6 +28,8 @@ class MyCustomDownloaderMiddleware(UserAgentMiddleware):
         ua = random.choice(self.user_agent_list)
         if ua:
             request.headers.setdefault('User-Agent',ua)
+        if spider.name == 'neihanshequ':
+            request.headers.setdefault('Cookie','Hm_lpvt_773f1a5aa45c642cf87eef671e4d3f6a=%s' % int(time.time()))
         '''
         request.headers.setdefault('Connection','keep-alive')
         request.headers.setdefault('Cache-Control','max-age=0')
