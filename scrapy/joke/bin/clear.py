@@ -12,7 +12,7 @@ db =  SimpleDB.MySQLdb(
 
 
 def getKey(item):
-        return hashlib.md5(item['content'].encode('unicode_escape').join(item['images'])).hexdigest()
+        return hashlib.md5(item['content'].encode('unicode_escape')+(item['images'])).hexdigest()
 
 sql = 'select id,content,images,md5code from joke'
 rows = db.query_dict(sql)()
