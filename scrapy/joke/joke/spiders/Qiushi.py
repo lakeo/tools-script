@@ -14,10 +14,10 @@ class QiushiSpider(CrawlSpider):
                   'http://www.qiushibaike.com/text']
 
     rules = (
-        Rule(LinkExtractor(allow=r'/8hr'), callback='parse_item', follow=True),
-        Rule(LinkExtractor(allow=r'/hot'), callback='parse_item', follow=True),
+        Rule(LinkExtractor(allow=r'/8hr/'), callback='parse_item', follow=True),
+        Rule(LinkExtractor(allow=r'/hot/'), callback='parse_item', follow=True),
         #Rule(LinkExtractor(allow=r'/imgrank'), callback='parse_item', follow=True),
-        Rule(LinkExtractor(allow=r'/text/'), callback='parse_item', follow=True),
+        #Rule(LinkExtractor(allow=r'/text/'), callback='parse_item', follow=True),
         #Rule(LinkExtractor(allow=r'/joke'), callback='parse_item', follow=True),
         #Rule(LinkExtractor(allow=r'/article'), callback='parse_item', follow=True),
     )
